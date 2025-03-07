@@ -66,3 +66,8 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.timer-wrapper {
+  display: flex;
+  justify-content: center;
+}

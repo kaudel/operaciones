@@ -71,3 +71,18 @@ button:focus-visible {
   display: flex;
   justify-content: center;
 }
+
+.focusError:focus{
+ border-color: orangered;
+ box-shadow: 0 0 0 .25rem rgba(219, 60, 11, 25%);
+}
+
+.focusCorrect:focus{  
+  border-color: green;
+  box-shadow: 0 0 0 .25rem rgba(13, 253, 51, 25%);
+}
+
+.focusNormal:focus{
+  border-color: #86b7fe;
+
+}

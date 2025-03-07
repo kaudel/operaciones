@@ -6,16 +6,23 @@ import Timer from "./Timer";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const Operations = () => {
-  const NewNumber = () => Math.floor(Math.random() * 10) + 1;
+
+  const NewNumber = (option) =>{
+    if (option){
+      return Math.floor(Math.random() * 12)+1;
+    }
+    return Math.floor(Math.random() * 12)
+  } 
 
   const inputRef = useRef();
   const [key, setKey] = useState(0);
   const [counterCorrect, setCounterCorrect] = useState(0);
   const [counterOperation, setCounterOperation] = useState(0);
   const [result, setResult] = useState("");
-  const [sumVal1, setSumVal1] = useState(NewNumber);
-  const [sumVal2, setSumVal2] = useState(NewNumber);
+  const [sumVal1, setSumVal1] = useState(NewNumber(true));
+  const [sumVal2, setSumVal2] = useState(NewNumber(false));
   const [isPlaying, setIsPlaying] = useState(false);
+  const [focusCSS, setFocusCss]=useState("focusNormal");
 
   const handleStart = () => {
     setIsPlaying(true);
@@ -41,21 +48,26 @@ const Operations = () => {
     processOperation();
   };
 
-  const handleFinish =()=>{
+  const handleFinish = () => {
     //setIsPlaying(false);
-  }
+  };
 
   const processOperation = () => {
     if (sumVal1 * sumVal2 == result) {
       setCounterCorrect(counterCorrect + 1);
+      setFocusCss("focusCorrect");
+    }else
+    {
+      setFocusCss("focusError");
     }
     nextOperation();
   };
 
   const nextOperation = () => {
     setCounterOperation(counterOperation + 1);
-    setSumVal1(NewNumber);
-    setSumVal2(NewNumber);
+    setSumVal1(NewNumber(true));
+    console.log(sumVal1);
+    setSumVal2(NewNumber(false));
     setResult("");
   };
 
@@ -98,13 +110,14 @@ const Operations = () => {
             ref={inputRef}
             pattern="[0-9]{0,5}"
             size="lg"
+            className={focusCSS}
           />
           <br />
           <Button type="submit" variant="primary" disabled={!isPlaying}>
             Enviar
           </Button>
           <hr />
-          <label>Num operaciones: {counterOperation}</label>
+          <label>Total operaciones: {counterOperation}</label>
           <br />
           <label>Operaciones correctas: {counterCorrect}</label>
         </Form>

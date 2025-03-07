@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "netlify-deploy": "node ./scripts/setHomepage.js; pnmp build; netlify deploy"
+    "predeploy":"npm run build",
+    "deploy":"gh-pages -d build",
   },
   "dependencies": {
     "react": "^19.0.0",
